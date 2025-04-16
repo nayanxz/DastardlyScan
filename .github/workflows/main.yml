@@ -1,0 +1,21 @@
+name: Dastardly Scan-n
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dastardly-scan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run Dastardly
+        run: |
+          docker run --rm \
+            -v ${{ github.workspace }}:/app \
+            --user $(id -u):$(id -g) \
+            portswigger/dastardly \
+            https://reflik.com
