@@ -17,5 +17,5 @@ jobs:
           docker run --rm \
             -v ${{ github.workspace }}:/app \
             --user $(id -u):$(id -g) \
-            portswigger/dastardly \
+            ghcr.io/portswigger/dastardly \
             https://reflik.com
