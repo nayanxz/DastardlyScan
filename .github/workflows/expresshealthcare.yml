@@ -1,0 +1,25 @@
+name: Scan_expresshealthcare.com
+on: 
+  workflow_dispatch: {}
+jobs:
+  dastardly-scan:
+    name: Dastardly Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Run Dastardly Action Step
+        continue-on-error: true
+        uses: PortSwigger/dastardly-github-action@main
+        with:
+          target-url: 'https://www.expresshealthcare.com'
+      - name: Publish Test Report
+        if: always()
+        uses: mikepenz/action-junit-report@v3
+        with:
+          report_paths: '**/dastardly-report.xml'
+          require_tests: true
+permissions:
+    contents: read
+    issues: read
+    checks: write
+    pull-requests: write
+    id-token: write
